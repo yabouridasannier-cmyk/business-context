@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call Guide — Look4Immo.pro</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e8e8e8; font-size: 14px; line-height: 1.5; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1a1f36 0%, #0f1117 100%); border-bottom: 2px solid #2563eb; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 17px; font-weight: 700; color: #fff; }
+  .badge-live { background: #dc2626; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .timer { background: #1e2030; border: 1px solid #2563eb; border-radius: 8px; padding: 6px 14px; font-size: 20px; font-weight: 700; color: #60a5fa; font-variant-numeric: tabular-nums; }
+
+  /* LAYOUT */
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #4b5563; padding: 14px 16px 6px; display: block; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 16px 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 16px 14px; }
+  .full { grid-column: 1 / -1; }
+
+  /* CARDS */
+  .card { background: #1a1f2e; border: 1px solid #2a2f45; border-radius: 10px; padding: 14px 16px; }
+  .card-accent-blue { border-left: 3px solid #2563eb; }
+  .card-accent-green { border-left: 3px solid #22c55e; }
+  .card-accent-purple { border-left: 3px solid #7c3aed; }
+  .card-accent-orange { border-left: 3px solid #f59e0b; }
+  .card-accent-red { border-left: 3px solid #dc2626; }
+
+  .card-title { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .phase-badge { background: #2563eb; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .card-title h3 { font-size: 13px; font-weight: 700; color: #fff; }
+  .time-tag { margin-left: auto; font-size: 10px; color: #6b7280; background: #0f1117; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+
+  .script { background: #0f1117; border-left: 3px solid #2563eb; padding: 8px 12px; border-radius: 0 6px 6px 0; font-style: italic; color: #93c5fd; font-size: 12px; margin-bottom: 8px; line-height: 1.6; }
+  .question { background: #0d1f0d; border-left: 3px solid #22c55e; padding: 6px 12px; border-radius: 0 6px 6px 0; color: #86efac; font-size: 12px; margin: 4px 0; }
+  .bullet { display: flex; gap: 8px; font-size: 12px; color: #d1d5db; padding: 3px 0; }
+  .bullet::before { content: "→"; color: #2563eb; flex-shrink: 0; font-weight: 700; }
+  .tip { background: #1f1a0a; border: 1px solid #78350f; border-radius: 6px; padding: 7px 12px; font-size: 11px; color: #fbbf24; margin-top: 8px; }
+  .tip-purple { background: #1a1528; border: 1px solid #5b21b6; border-radius: 6px; padding: 7px 12px; font-size: 11px; color: #c4b5fd; margin-top: 8px; }
+
+  /* OFFRES */
+  .pack { border-radius: 12px; padding: 18px; border: 2px solid; position: relative; overflow: hidden; }
+  .pack-fondateur { background: linear-gradient(135deg, #1e2a3a, #1a1f2e); border-color: #2563eb; }
+  .pack-partenaire { background: linear-gradient(135deg, #1a2e1e, #1a1f2e); border-color: #22c55e; }
+  .pack-equity { background: linear-gradient(135deg, #1f1528, #1a1f2e); border-color: #7c3aed; }
+  .pack-tag { position: absolute; top: 14px; right: -24px; font-size: 9px; font-weight: 800; padding: 4px 34px; transform: rotate(45deg); letter-spacing: 0.5px; }
+  .pack-tag.blue { background: #2563eb; color: white; }
+  .pack-tag.green { background: #16a34a; color: white; }
+  .pack-tag.purple { background: #7c3aed; color: white; }
+  .pack-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .price-big { font-size: 38px; font-weight: 900; line-height: 1; }
+  .price-big .cur { font-size: 18px; vertical-align: top; margin-top: 6px; display: inline-block; }
+  .price-big .per { font-size: 12px; color: #9ca3af; font-weight: 400; }
+  .price-blue { color: #60a5fa; }
+  .price-green { color: #4ade80; }
+  .price-purple { color: #c4b5fd; }
+  .price-anchor { font-size: 11px; color: #6b7280; text-decoration: line-through; margin-bottom: 12px; }
+  .feat { display: flex; gap: 8px; font-size: 12px; color: #d1d5db; padding: 4px 0; border-bottom: 1px solid #ffffff08; }
+  .feat:last-child { border-bottom: none; }
+  .feat .chk { flex-shrink: 0; font-size: 13px; }
+  .cta-btn { display: block; width: 100%; text-align: center; margin-top: 14px; color: white; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 13px; border: none; cursor: pointer; letter-spacing: 0.3px; }
+  .btn-blue { background: #2563eb; }
+  .btn-green { background: #16a34a; }
+  .btn-purple { background: #7c3aed; }
+
+  /* ARGUMENTS */
+  .arg { background: #1a1f2e; border: 1px solid #2a2f45; border-radius: 10px; padding: 12px 14px; }
+  .arg-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .arg-text { font-size: 12px; color: #e8e8e8; line-height: 1.55; }
+  .arg-text strong { color: #60a5fa; }
+  .arg-text .gr { color: #4ade80; }
+  .arg-text .pu { color: #c4b5fd; }
+
+  /* ROADMAP */
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .rm-phase { background: #0f1117; border-radius: 8px; padding: 12px; }
+  .rm-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
+  .rm-badge.b1 { background: #1e3a5f; color: #60a5fa; }
+  .rm-badge.b2 { background: #14532d; color: #4ade80; }
+  .rm-badge.b3 { background: #4c1d95; color: #c4b5fd; }
+  .rm-item { font-size: 11px; color: #d1d5db; padding: 2px 0; display: flex; gap: 6px; }
+  .rm-item::before { content: "→"; color: #4b5563; flex-shrink: 0; }
+  .rm-highlight { font-size: 11px; font-weight: 700; color: #fbbf24; margin-top: 6px; padding: 5px 8px; background: #1f1a0a; border-radius: 4px; }
+
+  /* OBJECTIONS */
+  .obj { background: #1a1f2e; border-radius: 8px; padding: 10px 14px; border-left: 3px solid #dc2626; margin-bottom: 8px; }
+  .obj-q { font-size: 11px; color: #fca5a5; font-weight: 600; margin-bottom: 4px; }
+  .obj-a { font-size: 12px; color: #d1d5db; font-style: italic; line-height: 1.5; }
+  .obj-bonus { font-size: 11px; color: #c4b5fd; margin-top: 4px; font-style: italic; }
+
+  /* CLOSING */
+  .closing-box { background: linear-gradient(135deg, #1e1a2e, #1a1f2e); border: 2px solid #7c3aed; border-radius: 12px; padding: 18px; }
+  .closing-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+  .step { background: #0f1117; border-radius: 8px; padding: 10px; text-align: center; }
+  .step-num { font-size: 22px; font-weight: 900; color: #7c3aed; }
+  .step-text { font-size: 11px; color: #d1d5db; margin-top: 4px; line-height: 1.4; }
+
+  /* PLAN B EQUITY */
+  .equity-box { background: linear-gradient(135deg, #1f1528, #1a1a2e); border: 2px solid #7c3aed; border-radius: 12px; padding: 18px; }
+  .equity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .equity-col { background: #0f1117; border-radius: 8px; padding: 14px; }
+  .equity-col h4 { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+  .equity-col.apport h4 { color: #fbbf24; }
+  .equity-col.gain h4 { color: #4ade80; }
+  .equity-row { font-size: 11px; color: #d1d5db; padding: 3px 0; display: flex; gap: 6px; }
+  .equity-row::before { content: "✓"; flex-shrink: 0; }
+  .equity-col.apport .equity-row::before { color: #fbbf24; }
+  .equity-col.gain .equity-row::before { color: #4ade80; }
+  .legal-note { margin-top: 12px; background: #1f1a0a; border: 1px solid #92400e; border-radius: 6px; padding: 8px 12px; font-size: 11px; color: #fbbf24; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, #2a2f45, transparent); margin: 6px 16px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>📞 Look4Immo.pro — Guide Call de Vente</h1>
+    <div style="font-size:11px;color:#6b7280;margin-top:2px;">Cible : 30 min · Zoom · Garder ouvert à côté du call</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="badge-live">🔴 EN DIRECT</div>
+    <div class="timer" id="timer">00:00</div>
+  </div>
+</div>
+
+<!-- ============ DÉROULÉ ============ -->
+<span class="section-label">① DÉROULÉ DU CALL</span>
+<div class="grid2">
+
+  <div class="card card-accent-blue">
+    <div class="card-title">
+      <div class="phase-badge">1</div>
+      <h3>Accroche — Poser le cadre</h3>
+      <span class="time-tag">0 – 2 min</span>
+    </div>
+    <div class="script">"Bonjour [Prénom], merci de prendre le temps. On a 30 minutes — je vous montre exactement ce qu'on construit, pourquoi ça vous concerne, et vous décidez si ça vous intéresse. C'est parti ?"</div>
+    <div class="tip">⚡ Direct = pro. Ne pas commencer par "je m'appelle, j'ai 16 ans, on est une startup...". Commencer par LEUR situation.</div>
+  </div>
+
+  <div class="card card-accent-green">
+    <div class="card-title">
+      <div class="phase-badge" style="background:#22c55e;">2</div>
+      <h3>Identifier la douleur</h3>
+      <span class="time-tag">2 – 7 min</span>
+    </div>
+    <div class="question">❓ "Aujourd'hui, comment vous gérez votre prospection digitale ?"</div>
+    <div class="question">❓ "Combien de temps par semaine vous passez sur les annonces et les leads ?"</div>
+    <div class="question">❓ "Vous avez un outil centralisé ou c'est encore éparpillé ?"</div>
+    <div class="tip">💡 Écouter. Ce qu'ils disent devient votre argument en phase 4. Ne pas pitcher encore.</div>
+  </div>
+
+  <div class="card card-accent-blue">
+    <div class="card-title">
+      <div class="phase-badge">3</div>
+      <h3>Démo SaaS</h3>
+      <span class="time-tag">7 – 17 min</span>
+    </div>
+    <div class="bullet">Partage d'écran — montrer l'interface principale</div>
+    <div class="bullet">Cibler la fonctionnalité qui résout LEUR douleur mentionnée</div>
+    <div class="bullet">Montrer le gain de temps concret : "Ce que vous faites en 2h, ici c'est 10 min"</div>
+    <div class="bullet">Relier à leur réponse : "Vous m'avez dit X — regardez comment ça change ça"</div>
+    <div class="tip">⚡ 2-3 features max. Pas besoin de tout montrer. Qualité &gt; quantité.</div>
+  </div>
+
+  <div class="card card-accent-green">
+    <div class="card-title">
+      <div class="phase-badge" style="background:#22c55e;">4</div>
+      <h3>Documents + Vision</h3>
+      <span class="time-tag">17 – 22 min</span>
+    </div>
+    <div class="bullet">Ouvrir <strong style="color:#60a5fa;">Rapport_MRR_V3</strong> — montrer le funnel de croissance</div>
+    <div class="bullet">"On a modélisé notre acquisition canal par canal, avec des taux réels"</div>
+    <div class="bullet">Montrer la feuille de route M1-3 / M3-6 / M6-12</div>
+    <div class="bullet">"À M5-6, on est en train de préparer notre dossier levée de fonds"</div>
+    <div class="tip">💡 L'objectif ici : montrer qu'on a un plan. Pas juste une idée. Une vraie structure.</div>
+  </div>
+
+  <div class="card full">
+    <div class="card-title">
+      <div class="phase-badge">5</div>
+      <h3>Présenter l'offre + prix</h3>
+      <span class="time-tag">22 – 27 min</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div>
+        <div class="script">"On ne travaille pas avec tout le monde. On sélectionne nos partenaires fondateurs — ceux qui ont la vision et qui veulent être dans la boucle dès le départ. C'est pour ça qu'on vous a contacté."</div>
+        <div class="script">"Une équipe de développement classique vous demanderait entre 50 000 et 80 000 € pour un projet comme ça. Nous, on est à 19 000 € — parce que votre collaboration, vos retours et votre nom dans nos premiers clients ont une valeur réelle pour nous."</div>
+      </div>
+      <div>
+        <div class="tip">⚡ <strong>Ancrage psychologique :</strong> citer 50 000-80 000 € d'abord. Puis annoncer 19 000 €. L'écart × 3-4 justifie immédiatement le prix.</div>
+        <div class="tip" style="margin-top:8px;">⚡ <strong>Ne pas s'excuser du prix.</strong> Assumer. "On sait ce que ça vaut, et on vous propose un tarif partenaire parce qu'on croit en cette collaboration."</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ VISION LONG TERME ============ -->
+<span class="section-label">② CRÉDIBILITÉ — ON SAIT CE QU'ON FAIT</span>
+<div style="padding:0 16px 14px;">
+  <div class="card" style="margin-bottom:12px;">
+    <div style="font-size:12px;color:#9ca3af;margin-bottom:12px;">Utiliser ces arguments pour montrer que c'est un projet sérieux, pas un side project d'ado :</div>
+    <div class="roadmap">
+      <div class="rm-phase">
+        <div class="rm-badge b1">Mois 1–3</div>
+        <div class="rm-item">Plateforme livrée et mise en ligne</div>
+        <div class="rm-item">30 à 80 agences bêta intégrées</div>
+        <div class="rm-item">Offres Free / Premium / Enterprise déployées</div>
+        <div class="rm-item">Stratégie d'acquisition activée</div>
+        <div class="rm-highlight">🎯 Premiers revenus récurrents générés</div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-badge b2">Mois 3–6</div>
+        <div class="rm-item">Diversification des canaux d'acquisition</div>
+        <div class="rm-item">Réunions stratégiques mensuelles com + dev</div>
+        <div class="rm-item">Optimisation des offres selon retours terrain</div>
+        <div class="rm-item">Break-even atteint à 20-35 agences</div>
+        <div class="rm-highlight">🎯 Rentabilité opérationnelle</div>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-badge b3">Mois 6–12</div>
+        <div class="rm-item">Dossier investisseurs prêt → levée de fonds</div>
+        <div class="rm-item">Réinvestissement dans la croissance produit</div>
+        <div class="rm-item">Objectif : tripler la base utilisateurs</div>
+        <div class="rm-item">Expansion géographique + nouveaux secteurs</div>
+        <div class="rm-highlight">🎯 Cap : 100 agences = 20 000 €/mois</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARGS CRÉDIBILITÉ -->
+<div class="grid3" style="padding-top:0;">
+  <div class="arg">
+    <div class="arg-label">📊 Modèle économique solide</div>
+    <div class="arg-text">"On est <strong>rentables à 20-35 agences</strong>. À 100 agences, on est à <span class="gr">20 000€/mois</span> de revenus récurrents. Le modèle est mathématiquement validé."</div>
+  </div>
+  <div class="arg">
+    <div class="arg-label">🚀 Ambition et trajectoire</div>
+    <div class="arg-text">"Notre cible c'est <strong>100K€/mois de MRR</strong> à horizon 18-24 mois. On a une feuille de route sur 12 mois avec des jalons chiffrés, pas des estimations vagues."</div>
+  </div>
+  <div class="arg">
+    <div class="arg-label">💼 Levée de fonds à M5-6</div>
+    <div class="arg-text">"À M5-6, on prépare un <strong>dossier investisseurs</strong>. Si on lève des fonds, vos conditions bêta restent intactes. Vous avez signé avant — vous êtes protégés."</div>
+  </div>
+  <div class="arg">
+    <div class="arg-label">🎯 Sélection rigoureuse</div>
+    <div class="arg-text">"On sélectionne <strong>5 agences fondatrices</strong> parmi les meilleures du marché. On ne veut pas des clients — on veut des partenaires qui ont des retours de qualité."</div>
+  </div>
+  <div class="arg">
+    <div class="arg-label">🔒 Prix garanti à vie</div>
+    <div class="arg-text">"<strong>Jamais de hausse</strong> sur votre abonnement fondateur. Peu importe la valorisation future, le prix bêta est contractuellement bloqué. C'est écrit."</div>
+  </div>
+  <div class="arg">
+    <div class="arg-label">🤝 Ce qu'on met en place pour vous</div>
+    <div class="arg-text">"Réunions stratégiques régulières, offres <span class="pu">sur mesure</span> à chaque palier, plan structuré avec jalons clairs. Vous avez une équipe, pas juste un outil."</div>
+  </div>
+</div>
+
+<!-- ============ OFFRES DÉVELOPPEMENT MVP ============ -->
+<span class="section-label">③ LES 2 OFFRES — DÉVELOPPEMENT MVP</span>
+
+<!-- Pitch intro offre -->
+<div style="padding:0 16px 10px;">
+  <div class="card" style="border-color:#2563eb;">
+    <div class="script" style="font-size:13px;margin:0;">"Une agence de dev classique vous facture ce projet entre <strong>50 000 et 80 000 €</strong>. On est une équipe technique spécialisée immobilier, on connaît le marché, et on vous propose un prix de lancement partenaire — parce que votre collaboration a de la valeur pour nous aussi."</div>
+  </div>
+</div>
+
+<div class="grid2">
+
+  <div class="pack pack-fondateur">
+    <div class="pack-tag blue">LANCEMENT</div>
+    <div class="pack-name">🔵 Pack MVP Fondateur</div>
+    <div class="price-big price-blue"><span class="cur">€</span>19 000<span class="per"> HT · paiement en 3×</span></div>
+    <div class="price-anchor">Valeur marché équivalente : ~55 000 € (agence classique)</div>
+
+    <!-- Stack de valeur -->
+    <div style="font-size:10px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:0.5px;margin:10px 0 6px;">Ce que vous obtenez :</div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Développement complet du MVP Look4Immo.pro <em style="color:#6b7280;">(valeur ~40 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Livraison en 8 à 10 semaines</span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Hébergement + déploiement offert 3 mois <em style="color:#6b7280;">(valeur ~1 200 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>30 bêta testeurs sélectionnés pour valider le produit <em style="color:#6b7280;">(valeur ~3 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Suivis hebdomadaires pendant tout le développement <em style="color:#6b7280;">(valeur ~2 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>3 mois de support technique post-livraison <em style="color:#6b7280;">(valeur ~3 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Formation équipe incluse (2h en visio)</span></div>
+    <div class="feat"><span class="chk" style="color:#60a5fa;">✓</span><span>Abonnement SaaS ensuite à <strong style="color:#60a5fa;">19 €/mois garanti à vie</strong></span></div>
+
+    <div style="background:#0f1117;border-radius:6px;padding:8px 12px;margin-top:10px;font-size:11px;color:#fbbf24;">
+      💰 Paiement en 3× : 6 333 € à la commande · 6 333 € mi-projet · 6 334 € à la livraison
+    </div>
+    <button class="cta-btn btn-blue" style="margin-top:12px;">→ "On part sur le Pack MVP Fondateur ?"</button>
+  </div>
+
+  <div class="pack pack-partenaire">
+    <div class="pack-tag green">RECOMMANDÉ</div>
+    <div class="pack-name">🟢 Pack MVP Partenaire Stratégique</div>
+    <div class="price-big price-green"><span class="cur">€</span>23 000<span class="per"> HT · paiement en 3×</span></div>
+    <div class="price-anchor">Valeur marché équivalente : ~78 000 € (agence classique)</div>
+
+    <div style="font-size:10px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:0.5px;margin:10px 0 6px;">Tout le Pack Fondateur, plus :</div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>80 bêta testeurs + rapport d'usage détaillé <em style="color:#6b7280;">(valeur ~5 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>6 mois de support et maintenance post-livraison <em style="color:#6b7280;">(valeur ~6 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Appels mensuels stratégiques <strong style="color:#4ade80;">à vie</strong> <em style="color:#6b7280;">(valeur ~4 800 €/an)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Tableau de bord analytics personnalisé <em style="color:#6b7280;">(valeur ~2 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Intégrations API sur mesure (CRM, portails) <em style="color:#6b7280;">(valeur ~5 000 €)</em></span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Roadmap personnalisée 12 mois avec jalons</span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Priorité absolue sur les évolutions futures du produit</span></div>
+    <div class="feat"><span class="chk" style="color:#4ade80;">✓</span><span>Abonnement SaaS ensuite à <strong style="color:#4ade80;">19 €/mois garanti à vie</strong></span></div>
+
+    <div style="background:#0f1117;border-radius:6px;padding:8px 12px;margin-top:10px;font-size:11px;color:#fbbf24;">
+      💰 Paiement en 3× : 7 667 € à la commande · 7 667 € mi-projet · 7 666 € à la livraison
+    </div>
+    <button class="cta-btn btn-green" style="margin-top:12px;">→ "On part sur le Pack MVP Partenaire ?"</button>
+  </div>
+
+</div>
+
+<!-- Comparatif rapide -->
+<div style="padding:0 16px 14px;">
+  <div style="background:#1a1f2e;border:1px solid #2a2f45;border-radius:10px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;font-size:11px;">
+      <div style="padding:8px 14px;font-weight:700;color:#6b7280;border-bottom:1px solid #2a2f45;background:#0f1117;">CE QUI EST INCLUS</div>
+      <div style="padding:8px 14px;font-weight:700;color:#60a5fa;text-align:center;border-bottom:1px solid #2a2f45;background:#0f1117;">FONDATEUR 19K</div>
+      <div style="padding:8px 14px;font-weight:700;color:#4ade80;text-align:center;border-bottom:1px solid #2a2f45;background:#0f1117;">PARTENAIRE 23K</div>
+      <!-- rows -->
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Développement MVP complet</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#60a5fa;">✓</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">✓</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Livraison 8-10 semaines</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#60a5fa;">✓</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">✓</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Bêta testeurs</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#60a5fa;">30</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">80 + rapport</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Hébergement offert</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#60a5fa;">3 mois</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">6 mois</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Support post-livraison</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#60a5fa;">3 mois</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">6 mois</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Appels stratégiques mensuels</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#6b7280;">—</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">À vie ✓</div>
+      <div style="padding:7px 14px;color:#d1d5db;border-bottom:1px solid #1f2535;">Intégrations API sur mesure</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#6b7280;">—</div><div style="padding:7px;text-align:center;border-bottom:1px solid #1f2535;color:#4ade80;">✓</div>
+      <div style="padding:7px 14px;color:#d1d5db;">Abonnement SaaS après livraison</div><div style="padding:7px;text-align:center;color:#60a5fa;font-weight:700;">19 €/mois</div><div style="padding:7px;text-align:center;color:#4ade80;font-weight:700;">19 €/mois</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ OBJECTIONS ============ -->
+<span class="section-label">④ OBJECTIONS — RÉPONSES PRÊTES</span>
+<div class="grid2">
+  <div>
+    <div class="obj">
+      <div class="obj-q">❌ "C'est cher, 19 000 €"</div>
+      <div class="obj-a">"Une agence de dev classique vous facture ça entre 50 000 et 80 000 €. Là vous êtes à 19 000 € avec support, bêta testeurs et abonnement garanti à vie. C'est un prix partenaire, pas un prix marché."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❌ "Je peux pas payer en une fois"</div>
+      <div class="obj-a">"Pas de problème — on propose un paiement en 3 fois. Un tiers à la commande, un tiers à mi-projet, le dernier tiers à la livraison. Vous ne payez que ce qui est livré."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❌ "J'ai déjà un prestataire"</div>
+      <div class="obj-a">"Ce que fait votre prestataire, il le fait pour tout le monde. Nous, on est spécialisés immobilier. Look4Immo est conçu pour ce marché précis — pas un outil générique adapté."</div>
+    </div>
+  </div>
+  <div>
+    <div class="obj">
+      <div class="obj-q">❌ "Je vais réfléchir"</div>
+      <div class="obj-a">"Je comprends. Qu'est-ce qui vous ferait décider aujourd'hui ? Il y a quelque chose qui bloque ?" → Identifier la vraie objection cachée.</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❌ "Et si ça ne marche pas ?"</div>
+      <div class="obj-a">"C'est pour ça qu'on paye en 3 fois — vous validez à chaque étape. Si à mi-projet vous n'êtes pas satisfait, on s'arrête. Vous avez payé seulement le tiers 1."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❌ "Vous êtes une petite équipe, vous allez tenir ?"</div>
+      <div class="obj-a">"Notre avantage c'est d'être petits et ultra-réactifs. Chaque retour terrain est intégré sous 48h. Pas comme les gros éditeurs qui mettent 6 mois à sortir une mise à jour."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PLAN B EQUITY ============ -->
+<span class="section-label">⑤ PLAN B — OFFRE DE SECOURS SI LE PRIX NE CONVAINC PAS</span>
+<div style="padding:0 16px 14px;">
+  <div class="equity-box">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
+      <div style="font-size:16px;font-weight:800;color:#c4b5fd;">🤝 Pack Co-Fondateur Stratégique</div>
+      <div style="font-size:11px;background:#4c1d95;color:#c4b5fd;padding:2px 10px;border-radius:10px;font-weight:700;">CONFIDENTIEL · Sortir seulement si besoin</div>
+    </div>
+    <div style="font-size:12px;color:#9ca3af;margin-bottom:12px;">Si la personne dit "19€ c'est pas sérieux" ou si c'est un profil stratégique (réseau large, directeur de franchise) — proposer ceci :</div>
+
+    <div class="script" style="font-size:13px;margin-bottom:14px;">"On a une option différente pour les agences qui veulent s'impliquer à un autre niveau. Au lieu d'un abonnement mensuel, on peut discuter d'une participation au capital de Look4Immo — vous devenez actionnaire, pas juste client."</div>
+
+    <div class="pack pack-equity" style="margin-bottom:14px;">
+      <div class="pack-tag purple">EQUITY</div>
+      <div class="pack-name">🟣 Pack Co-Fondateur Stratégique</div>
+      <div class="price-big price-purple"><span style="font-size:14px;font-weight:700;">1 – 3%</span> <span style="font-size:13px;color:#9ca3af;font-weight:400;">du capital · à définir ensemble</span></div>
+      <div style="font-size:11px;color:#6b7280;margin-bottom:12px;">Abonnement mensuel symbolique : 0 € ou 1 €</div>
+      <div class="equity-grid">
+        <div class="equity-col apport">
+          <h4>🟡 Ce que vous apportez</h4>
+          <div class="equity-row">Devenir référence client officielle</div>
+          <div class="equity-row">Introductions à votre réseau d'agences</div>
+          <div class="equity-row">Feedback structuré mensuel (30 min/mois)</div>
+          <div class="equity-row">Témoignage vidéo utilisable en marketing</div>
+          <div class="equity-row">Votre expertise terrain pour orienter le produit</div>
+        </div>
+        <div class="equity-col gain">
+          <h4>🟢 Ce que vous gagnez</h4>
+          <div class="equity-row">Accès gratuit à vie à tout le produit</div>
+          <div class="equity-row">Dividendes si l'entreprise devient profitable</div>
+          <div class="equity-row">Participation si levée de fonds ou cession</div>
+          <div class="equity-row" style="color:#fbbf24;">Ex : 2% × 500K val. = <strong>10 000 €</strong></div>
+          <div class="equity-row" style="color:#fbbf24;">Ex : 2% × 2M val. = <strong>40 000 €</strong></div>
+        </div>
+      </div>
+      <button class="cta-btn btn-purple" style="margin-top:14px;">→ "Est-ce que ce type de partenariat vous intéresse ?"</button>
+    </div>
+
+    <div class="legal-note">
+      ⚠️ <strong>Note pour toi :</strong> En auto-entrepreneur, tu ne peux pas encore émettre de vraies actions. Pour formaliser cette offre, il faudra passer en SAS (société par actions). Pour l'instant tu peux mentionner "on va structurer ça en SAS d'ici M3" et prendre un engagement moral — mais ne signe pas de promesse d'actions avant d'avoir un juriste. Utilise cette offre pour ouvrir la discussion, pas pour conclure immédiatement.
+    </div>
+  </div>
+</div>
+
+<!-- ============ CLOSING ============ -->
+<span class="section-label">⑥ CLOSING — PHRASE FINALE + ÉTAPES</span>
+<div style="padding:0 16px 24px;">
+  <div class="closing-box">
+    <div class="script" style="font-size:13px;margin-bottom:6px;">"Est-ce que vous voulez faire partie des 5 partenaires fondateurs de Look4Immo ? On vous envoie le devis aujourd'hui — vous signez quand vous êtes prêt, et on démarre dans la semaine."</div>
+    <div class="closing-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Accord verbal sur le pack choisi</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Email de confirmation dans les 2h avec le récap</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Contrat simple (1 page) envoyé sous 24h</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Compte activé + onboarding dans la semaine</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const start = Date.now();
+  setInterval(() => {
+    const e = Math.floor((Date.now() - start) / 1000);
+    const m = String(Math.floor(e / 60)).padStart(2, '0');
+    const s = String(e % 60).padStart(2, '0');
+    const el = document.getElementById('timer');
+    el.textContent = m + ':' + s;
+    if (e > 1800) el.style.color = '#ef4444';
+    else if (e > 1500) el.style.color = '#f59e0b';
+  }, 1000);
+</script>
+</body>
+</html>

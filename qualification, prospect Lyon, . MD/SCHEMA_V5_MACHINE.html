@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine V5 — Schéma de Prospection</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 50px;
+  }
+
+  /* FLOW SECTION */
+  .flow-section {
+    position: relative;
+    margin-bottom: 60px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #555;
+    margin-bottom: 16px;
+    padding-left: 4px;
+  }
+
+  .flow-box {
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 28px 32px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .flow-box:hover {
+    border-color: #444;
+  }
+
+  .flow-box.source {
+    border-left: 4px solid #4fc3f7;
+  }
+
+  .flow-box.filter {
+    border-left: 4px solid #ffd54f;
+  }
+
+  .flow-box.split {
+    border-left: 4px solid #7c4dff;
+  }
+
+  .flow-box.output-a {
+    border-left: 4px solid #ff7043;
+  }
+
+  .flow-box.output-b {
+    border-left: 4px solid #66bb6a;
+  }
+
+  .flow-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .flow-title .step-num {
+    background: #222;
+    border-radius: 8px;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+  }
+
+  .flow-desc {
+    color: #999;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .flow-detail {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #bbb;
+  }
+
+  .flow-detail code {
+    background: #252525;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: #4fc3f7;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .flow-detail ul {
+    padding-left: 18px;
+    margin: 6px 0;
+  }
+
+  .flow-detail li {
+    margin-bottom: 4px;
+  }
+
+  .flow-detail .highlight {
+    color: #ffd54f;
+    font-weight: 600;
+  }
+
+  .flow-detail .green { color: #66bb6a; }
+  .flow-detail .red { color: #ff7043; }
+  .flow-detail .blue { color: #4fc3f7; }
+  .flow-detail .purple { color: #b388ff; }
+
+  /* ARROW */
+  .arrow-down {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0;
+  }
+
+  .arrow-down svg {
+    width: 24px;
+    height: 40px;
+  }
+
+  .arrow-down path {
+    stroke: #333;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* SPLIT LAYOUT */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .split-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.6rem; }
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-card {
+    background: #151515;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .stat-value.blue { color: #4fc3f7; }
+  .stat-value.yellow { color: #ffd54f; }
+  .stat-value.red { color: #ff7043; }
+  .stat-value.green { color: #66bb6a; }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* BILAN SECTION */
+  .bilan-section {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 36px;
+    margin-top: 50px;
+  }
+
+  .bilan-section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #e0e0e0;
+  }
+
+  .bilan-section h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: #ccc;
+    border-bottom: 1px solid #222;
+    padding-bottom: 8px;
+  }
+
+  .bilan-section p {
+    color: #999;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .bilan-section strong { color: #ddd; }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.85rem;
+  }
+
+  .comparison-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: #1a1a1a;
+    color: #888;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .comparison-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    color: #bbb;
+  }
+
+  .comparison-table tr:hover td {
+    background: #161616;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .tag.new { background: #1a3a1a; color: #66bb6a; }
+  .tag.removed { background: #3a1a1a; color: #ff7043; }
+  .tag.kept { background: #1a2a3a; color: #4fc3f7; }
+
+  .credits-warning {
+    background: #2a1a00;
+    border: 1px solid #4a3000;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    color: #ffd54f;
+    line-height: 1.6;
+  }
+
+  .idea-card {
+    background: #1a1a2a;
+    border: 1px solid #2a2a3a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+  }
+
+  .idea-card .idea-title {
+    font-weight: 600;
+    color: #b388ff;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .idea-card .idea-desc {
+    color: #888;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Machine V5 — Vibe Prospecting</h1>
+  <p class="subtitle">De la qualification manuelle → au pipeline automatisé. Schéma complet.</p>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value blue">~5 min</div>
+      <div class="stat-label">Temps par batch</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value yellow">50-100</div>
+      <div class="stat-label">Leads / session</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value red">2</div>
+      <div class="stat-label">Catégories de sortie</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value green">~8</div>
+      <div class="stat-label">Règles (vs 28 avant)</div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 1 — SOURCE -->
+  <div class="flow-section">
+    <div class="section-label">Étape 1 — Acquisition</div>
+    <div class="flow-box source">
+      <div class="flow-title">
+        <span class="step-num">01</span>
+        FETCH — Vibe Prospecting
+      </div>
+      <div class="flow-desc">
+        Requête API unique : entreprises Lyon métropole, filtrées par CA, taille, niche.
+      </div>
+      <div class="flow-detail">
+        <code>fetch-entities</code> avec filtres combinés :<br><br>
+        <ul>
+          <li><span class="highlight">Zone :</span> Lyon + 59 communes (code région FR-69 / city_region)</li>
+          <li><span class="highlight">CA :</span> ≥ 150k€ (filtre revenue — élimine Gate 2 d'un coup)</li>
+          <li><span class="highlight">Taille :</span> 1-200 employés (PME locales)</li>
+          <li><span class="highlight">Niches :</span> les 25 AGS via <code>linkedin_category</code> ou <code>naics_category</code></li>
+          <li><span class="highlight">Exclusions :</span> boulangeries, coiffeurs, cafés/bars (filtres négatifs)</li>
+          <li><span class="blue">BONUS — Signal recrutement :</span> <code>fetch-businesses-events</code> filtre hiring = angle "vous recrutez, votre site suit pas"</li>
+        </ul>
+        <br>
+        → Résultat : <strong>50-100+ entreprises</strong> déjà filtrées par CA. Gate 2 = morte. Fini le pappers manuel.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down">
+    <svg viewBox="0 0 24 40"><path d="M12 0 L12 32 M6 26 L12 34 L18 26"/></svg>
+  </div>
+
+  <!-- ÉTAPE 2 — ENRICHISSEMENT -->
+  <div class="flow-section">
+    <div class="section-label">Étape 2 — Enrichissement</div>
+    <div class="flow-box filter">
+      <div class="flow-title">
+        <span class="step-num">02</span>
+        ENRICH — Contacts + Données entreprise
+      </div>
+      <div class="flow-desc">
+        Enrichissement automatique : téléphone dirigeant, email pro, stack techno, tout en un appel API.
+      </div>
+      <div class="flow-detail">
+        <strong>Sur les entreprises :</strong> <code>enrich-business</code><br>
+        <ul>
+          <li>Firmographics : CA confirmé, effectif, date création, SIRET</li>
+          <li>Technographics : stack web (WordPress vieux ? Wix ? Jimdo ? Pas de site ?)</li>
+          <li>Workforce trends : recrutement actif = signal de croissance</li>
+        </ul>
+        <br>
+        <strong>Sur les dirigeants :</strong> <code>enrich-prospects</code> (entity_type = prospects)<br>
+        <ul>
+          <li><span class="green">Téléphone direct</span> — mobile (06/07) ou fixe direct</li>
+          <li><span class="green">Email pro</span> — pour la machine secrétariat</li>
+          <li><span class="green">LinkedIn</span> — pour personnaliser l'approche</li>
+          <li>Poste exact, ancienneté, historique carrière</li>
+        </ul>
+        <br>
+        <span class="red">⚡ Ce qui disparaît :</span> recherche manuelle 6 sources (R28), WebSearch pappers, recherche LinkedIn manuelle. <strong>Tout est automatique.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down">
+    <svg viewBox="0 0 24 40"><path d="M12 0 L12 32 M6 26 L12 34 L18 26"/></svg>
+  </div>
+
+  <!-- ÉTAPE 3 — TRI / SPLIT -->
+  <div class="flow-section">
+    <div class="section-label">Étape 3 — Le tri décisif</div>
+    <div class="flow-box split">
+      <div class="flow-title">
+        <span class="step-num">03</span>
+        SPLIT — Tri par type de contact
+      </div>
+      <div class="flow-desc">
+        Un seul critère de tri : est-ce qu'on a le <strong>numéro mobile du dirigeant</strong> (06/07) ?
+      </div>
+      <div class="flow-detail">
+        Le tri se fait automatiquement sur les données enrichies :<br><br>
+        <table style="width:100%; font-size: 0.82rem;">
+          <tr>
+            <td style="padding:8px; border-right:1px solid #333; width:50%; vertical-align:top;">
+              <span class="red" style="font-weight:700;">❌ PAS de mobile dirigeant</span><br><br>
+              = Secrétariat / standard / fixe uniquement<br>
+              = On ne peut pas cold caller le décideur<br><br>
+              → <strong style="color:#ff7043;">CATÉGORIE A : Machine Secrétariat</strong>
+            </td>
+            <td style="padding:8px 8px 8px 16px; width:50%; vertical-align:top;">
+              <span class="green" style="font-weight:700;">✅ Mobile dirigeant (06/07)</span><br><br>
+              = Accès direct au décideur<br>
+              = Cold call de qualité possible<br><br>
+              → <strong style="color:#66bb6a;">CATÉGORIE B : CRM Cold Call</strong>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <span class="purple">Note :</span> Les prospects avec email pro mais sans mobile → Catégorie A aussi.
+        Les prospects avec mobile + email → Catégorie B (l'email sert de relance post-appel).
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-down">
+    <svg viewBox="0 0 24 40"><path d="M12 0 L12 32 M6 26 L12 34 L18 26"/></svg>
+  </div>
+
+  <!-- ÉTAPE 4 — DOUBLE SORTIE -->
+  <div class="flow-section">
+    <div class="section-label">Étape 4 — Double pipeline de sortie</div>
+    <div class="split-grid">
+
+      <!-- CATÉGORIE A -->
+      <div class="flow-box output-a">
+        <div class="flow-title">
+          <span class="step-num">A</span>
+          🏢 Machine Secrétariat
+        </div>
+        <div class="flow-desc">
+          Prospects sans contact direct → séquence email automatisée
+        </div>
+        <div class="flow-detail">
+          <strong>Entrée :</strong> email pro du dirigeant OU email générique (contact@, info@)<br><br>
+          <strong>Séquence de relance :</strong>
+          <ul>
+            <li><span class="highlight">J+0 :</span> Email initial personnalisé (angle + accroche factuelle)</li>
+            <li><span class="highlight">J+3 :</span> Relance 1 — "Suite à mon email"</li>
+            <li><span class="highlight">J+7 :</span> Relance 2 — Valeur ajoutée (cas client / stat)</li>
+            <li><span class="highlight">J+14 :</span> Relance 3 — Dernière tentative</li>
+            <li><span class="highlight">J+21 :</span> Relance 4 — "Je ne vous dérangerai plus"</li>
+          </ul>
+          <br>
+          <strong>Si réponse :</strong> → transfert vers Catégorie B (CRM cold call) ou R1 directe<br>
+          <strong>Si aucune réponse :</strong> → archivé, relancé dans 3 mois<br><br>
+          <span class="purple">Outil :</span> Gmail draft automatisé via MCP Gmail + scheduled task Cowork<br>
+          <span class="purple">Volume :</span> ~10-20 emails/jour (raisonnable, pas de spam)
+        </div>
+      </div>
+
+      <!-- CATÉGORIE B -->
+      <div class="flow-box output-b">
+        <div class="flow-title">
+          <span class="step-num">B</span>
+          📞 CRM Cold Call Dirigeant
+        </div>
+        <div class="flow-desc">
+          Prospects avec mobile dirigeant → cold call de qualité
+        </div>
+        <div class="flow-detail">
+          <strong>Entrée :</strong> fiche complète dans le CRM (StructurA Lead)<br><br>
+          <strong>Fiche CRM enrichie :</strong>
+          <ul>
+            <li><span class="green">📞 Contact :</span> Mobile dirigeant + nom + LinkedIn</li>
+            <li><span class="green">🎯 Angle :</span> Refonte / Création / SEO / Image de marque</li>
+            <li><span class="green">📣 Accroche :</span> Phrase factuelle prête à dire au téléphone</li>
+            <li><span class="green">🔗 Implication :</span> Concurrent + fait marquant</li>
+          </ul>
+          <br>
+          <strong>Action Yanis :</strong> 25 cold calls/jour (GK2 13h30-17h00)<br>
+          <strong>Si R1 :</strong> → pipeline commercial standard (R1 → R2 → R3 → C1)<br><br>
+          <span class="purple">Nouveaux angles Vibe :</span><br>
+          "Vous recrutez 3 postes, mais votre site ne suit pas"<br>
+          "Vos concurrents utilisent [techno X], vous êtes sur WordPress 2018"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BILAN COMPLET -->
+  <div class="bilan-section">
+    <h2>📊 Bilan complet — V4.5 → V5 Vibe</h2>
+
+    <h3>Ce qui change fondamentalement</h3>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>V4.5 (actuelle)</th>
+          <th>V5 Vibe (nouvelle)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Recherche prospects</td>
+          <td>WebSearch manuelle niche×zone (5 sous-agents)</td>
+          <td><code>fetch-entities</code> — 1 requête API <span class="tag new">NOUVEAU</span></td>
+        </tr>
+        <tr>
+          <td>Vérification CA</td>
+          <td>Pappers manuel + Gate 2 binaire</td>
+          <td>Filtre API revenue ≥ 150k <span class="tag removed">GATE 2 SUPPRIMÉE</span></td>
+        </tr>
+        <tr>
+          <td>Recherche téléphone</td>
+          <td>6 sources manuelles (R28)</td>
+          <td><code>enrich-prospects</code> contacts <span class="tag removed">R28 SUPPRIMÉE</span></td>
+        </tr>
+        <tr>
+          <td>Recherche dirigeant</td>
+          <td>Pappers + LinkedIn + Google manuel</td>
+          <td><code>enrich-prospects</code> profiles <span class="tag new">AUTO</span></td>
+        </tr>
+        <tr>
+          <td>Évaluation site</td>
+          <td>WebFetch HTML + Chrome screenshot + scoring 4 dimensions</td>
+          <td>Techno stack API + Chrome rapide si besoin <span class="tag kept">SIMPLIFIÉ</span></td>
+        </tr>
+        <tr>
+          <td>Scoring</td>
+          <td>50/25/15/10 sur 4 dimensions, 4 gates</td>
+          <td>Tri binaire : mobile oui/non → 2 catégories <span class="tag removed">SCORING MORT</span></td>
+        </tr>
+        <tr>
+          <td>Sortie</td>
+          <td>1 pipeline : CRM "Prospect identifié"</td>
+          <td>2 pipelines : Secrétariat + Cold Call <span class="tag new">DOUBLE</span></td>
+        </tr>
+        <tr>
+          <td>Nombre de règles</td>
+          <td>28+ (R1 à R28)</td>
+          <td>~8 essentielles <span class="tag new">-70%</span></td>
+        </tr>
+        <tr>
+          <td>Temps pour 50 leads</td>
+          <td>~3-5 heures</td>
+          <td>~15-20 minutes <span class="tag new">×10</span></td>
+        </tr>
+        <tr>
+          <td>Supabase</td>
+          <td>Base intermédiaire obligatoire (6 phases)</td>
+          <td>Optionnel — Vibe + CRM suffisent <span class="tag removed">SIMPLIFIÉ</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Limites du MCP Vibe Prospecting — soyons lucides</h3>
+
+    <div class="credits-warning">
+      <strong>Coût en crédits :</strong> Chaque opération consomme des crédits Explorium. Les enrichissements (emails, téléphones, techno) coûtent ~1 crédit/prospect/enrichissement. Pour 100 prospects × 3 enrichissements = ~300 crédits par session.<br><br>
+      <strong>Couverture France :</strong> Base de 200M+ entreprises MAIS orientée US/anglophone. La couverture PME françaises locales (artisans Lyon) est probablement incomplète. Il faudra tester avec un premier batch pour voir le taux de couverture réel.<br><br>
+      <strong>Téléphones mobiles FR :</strong> Les 06/07 de dirigeants de PME françaises sont plus difficiles à trouver que les numéros US. Le taux de match sera probablement 40-60%, pas 90%.<br><br>
+      <strong>Qualité site web :</strong> Vibe donne la techno (WordPress, Wix) et le domaine, mais PAS la qualité visuelle du site. Pour l'évaluation esthétique (Gate 3, axes d'amélioration), il faudra toujours un passage Chrome — mais sur un set beaucoup plus petit et déjà pré-filtré.<br><br>
+      <strong>Conclusion :</strong> Vibe Prospecting ne remplace pas 100% de la machine. Il remplace ~70% du travail de recherche et d'enrichissement. Les 30% restants (évaluation site + accroche personnalisée) restent notre valeur ajoutée.
+    </div>
+
+    <h3>🧠 Idées supplémentaires — les angles qu'on débloque</h3>
+
+    <div class="idea-card">
+      <div class="idea-title">1. Angle "Vous recrutez" — Signal d'or</div>
+      <div class="idea-desc">
+        <code>fetch-businesses-events</code> filtre <code>hiring_in_*</code> → entreprises qui recrutent activement. Argument : "Vous investissez dans votre équipe mais pas dans votre vitrine en ligne. Vos futurs employés et clients googlelisent votre boîte — et ils tombent sur ÇA." Très puissant sur les artisans BTP qui recrutent.
+      </div>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-title">2. Angle "Croissance sans site" — Création pure</div>
+      <div class="idea-desc">
+        Filtrer les entreprises avec CA > 300k€ + aucun site web détecté (<code>has_website: false</code>). Ces boîtes tournent au bouche-à-oreille depuis des années. Argument : "Vous faites [X]€ de CA sans site. Imaginez avec." Volume potentiel énorme sur les artisans BTP lyonnais.
+      </div>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-title">3. Angle "Techno obsolète" — Refonte ciblée</div>
+      <div class="idea-desc">
+        <code>enrich-business</code> technographics → repérer les WordPress < 2020, les sites Jimdo, les sites Flash encore vivants. Argument technique : "Votre site tourne sur [techno] qui n'est plus maintenue. Ça impacte votre sécurité et votre référencement." Marche très bien sur les PME B2B.
+      </div>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-title">4. Angle "Intent data" — Timing parfait</div>
+      <div class="idea-desc">
+        <code>business_intent_topics</code> dans fetch-entities → entreprises qui cherchent activement des solutions "website redesign", "SEO services", "web design". Ce sont des prospects CHAUDS — ils sont déjà en recherche. Volume plus faible mais taux de conversion beaucoup plus élevé.
+      </div>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-title">5. Machine séquentielle Valentin — Règle des 5 relances multicanal</div>
+      <div class="idea-desc">
+        Combiner les deux catégories : Catégorie A (email) → si réponse → Catégorie B (call). Catégorie B (call) → si pas de réponse → email de suivi. Au total, chaque prospect reçoit 5 touches sur 2+ canaux. C'est exactement la règle Valentin, mais industrialisée.
+      </div>
+    </div>
+
+    <h3>🛠️ Plan de mise en place — par ordre de priorité</h3>
+
+    <p><strong>Phase 1 — Test de couverture (aujourd'hui, 30 min)</strong><br>
+    Connecter Vibe Prospecting → lancer 1 requête test <code>fetch-entities</code> sur Lyon, 50 résultats, niches BTP → voir le taux de couverture réel. Si < 30% de match = le MCP est pas assez bon pour la France, on ajuste. Si > 50% = on continue.</p>
+
+    <p><strong>Phase 2 — Premier batch enrichi (1-2h)</strong><br>
+    Enrichir les résultats du test : firmographics + contacts + techno. Vérifier : combien ont un téléphone mobile ? combien ont un email pro ? combien ont un site détectable ? Ça nous donne le ratio Catégorie A / Catégorie B réel.</p>
+
+    <p><strong>Phase 3 — Séquence email + CRM (1 journée)</strong><br>
+    Écrire les 5 templates d'emails (séquence secrétariat). Configurer le workflow Gmail (scheduled task Cowork ou outil externe type Lemlist/Instantly). Adapter le format CRM pour la Catégorie B.</p>
+
+    <p><strong>Phase 4 — Skill Cowork V5 (2-3h)</strong><br>
+    Créer le skill <code>qualification-v5</code> qui encapsule tout le workflow : fetch → enrich → split → inject. Commande : <code>session 50</code> = 50 leads triés et injectés en ~15 min.</p>
+
+    <p><strong>Phase 5 — Automatisation quotidienne (30 min)</strong><br>
+    Scheduled task Cowork : tous les matins à 8h00, la machine génère X leads frais + envoie les emails du jour. Yanis arrive avec son pipeline rempli.</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>
