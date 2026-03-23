@@ -1,8 +1,0 @@
-[
-  {
-    "produit": "ensemble 2 pièces top smocké floral jupe longue fluide grande taille",
-    "couleur": "rose fleuri",
-    "output_dir": "annonces/03_GT_ensemble_smocke/images",
-    "note": "Vêtement grande taille — le script génère un mannequin slim standard, ce qui n'est pas représentatif du persona GT. Images utilisables pour montrer le tissu et le style, mais Yanis devra idéalement compléter avec photos réelles sur mannequin grande taille."
-  }
-]
