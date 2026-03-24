@@ -1,0 +1,194 @@
+[
+  {
+    "produit": "robe longue fleurie manches bouffantes nœud taille",
+    "couleur": "rose fleuri",
+    "persona": "romantique",
+    "type": "vetement",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T01_robe_longue_fleurie",
+    "image_url": "https://img.kwcdn.com/product/20add7017d/b1b29839-319c-4ca1-be01-a6d7a6f1adb9_800x800.jpeg"
+  },
+  {
+    "produit": "pochette baguette 3D motif floral sac de soirée chaîne dorée",
+    "couleur": "noir",
+    "persona": "romantique",
+    "type": "vetement",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T02_pochette_florale_soiree",
+    "image_url": "https://img.kwcdn.com/product/open/2024-09-11/1726064713417-89b635538eee4e84883c0b240f36eb03-goods.jpeg"
+  },
+  {
+    "produit": "robe florale col V mi-mollet manches bouffantes ourlet volants",
+    "couleur": "rose",
+    "persona": "romantique",
+    "type": "vetement",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T03_robe_florale_rose",
+    "image_url": null
+  },
+  {
+    "produit": "branches de prunier artificiel blanc décoration florale",
+    "couleur": "blanc",
+    "persona": "romantique",
+    "type": "deco",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T04_branches_prunier_blanc",
+    "image_url": "https://img.kwcdn.com/product/fancyalgo/toaster-api/toaster-processor-image-cm2in/80779c90-f42c-11ef-9a6d-0a580a66d8f5.jpg"
+  },
+  {
+    "produit": "lampe de chevet plumes blanches base dorée port USB tricolore",
+    "couleur": "blanc doré",
+    "persona": "romantique",
+    "type": "deco",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T05_lampe_plumes_blanches",
+    "image_url": "https://img.kwcdn.com/product/open/5d5bbffeb2f74c5b9b7385ea7bfb1e52-goods.jpeg"
+  },
+  {
+    "produit": "nappe dentelle blanc style français table rectangulaire",
+    "couleur": "blanc",
+    "persona": "romantique",
+    "type": "deco",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T06_nappe_dentelle_blanc",
+    "image_url": null
+  },
+  {
+    "produit": "robe blanche épaules dénudées soirée ourlet volants manches évasées",
+    "couleur": "blanc",
+    "persona": "romantique",
+    "type": "vetement",
+    "output_dir": "personas/ROMANTIQUE_VICTORIENNE/annonces/T07_robe_blanche_soiree",
+    "image_url": null
+  },
+  {
+    "produit": "tapis rond peluche épais antidérapant",
+    "couleur": "beige",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T08_tapis_rond_peluche",
+    "image_url": "https://img.kwcdn.com/product/open/87d3d088dbbd4132afa83323edd6abb9-goods.jpeg"
+  },
+  {
+    "produit": "ensemble deux pièces chemise rayée décontractée et jupe",
+    "couleur": "bleu marine blanc",
+    "persona": "stockholm",
+    "type": "vetement",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T09_ensemble_chemise_jupe",
+    "image_url": "https://img.kwcdn.com/product/open/48c5f29b4a834fe1b78300aef0c22fb2-goods.jpeg"
+  },
+  {
+    "produit": "table de chevet design original forme ours",
+    "couleur": "noir",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T10_table_chevet_ours",
+    "image_url": "https://img.kwcdn.com/product/aisc_image/algo/pass/ec231c5b-8a22-4182-941a-39b3a0c358fd.jpg"
+  },
+  {
+    "produit": "tapis salon rond crème imitation cachemire doux moelleux",
+    "couleur": "crème",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T11_tapis_salon_creme",
+    "image_url": "https://img.kwcdn.com/product/open/b829ba29c92b4d9aa503e5c49e6b6692-goods.jpeg"
+  },
+  {
+    "produit": "diffuseur aromathérapie en bois LED 7 couleurs brume USB",
+    "couleur": "bois clair naturel",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T12_diffuseur_bois_led",
+    "image_url": "https://img.kwcdn.com/product/open/2024-03-09/1709947244303-82ce445f18424fe0a181e5ba00c57328-goods.jpeg"
+  },
+  {
+    "produit": "toile murale moderne texture ondulée grand format",
+    "couleur": "tons neutres beige gris",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T13_toile_moderne_ondulee",
+    "image_url": "https://img.kwcdn.com/product/open/e5026f1d51f640ffa0527c3201068628-goods.jpeg"
+  },
+  {
+    "produit": "tapis rond velours style nordique",
+    "couleur": "marron",
+    "persona": "stockholm",
+    "type": "deco",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T14_tapis_nordique_marron",
+    "image_url": null
+  },
+  {
+    "produit": "ensemble top épaules dénudées color block et pantalon large",
+    "couleur": "gris",
+    "persona": "stockholm",
+    "type": "vetement",
+    "output_dir": "personas/STYLE_STOCKHOLM/annonces/T15_ensemble_top_pantalon_gris",
+    "image_url": "https://img.kwcdn.com/product/open/31029f1dd0b9450089730561ab86a0d6-goods.jpeg"
+  },
+  {
+    "produit": "tapis rectangulaire tressé anneaux style sisal naturel",
+    "couleur": "marron naturel",
+    "persona": "cottagecore_gt",
+    "type": "deco",
+    "output_dir": "personas/GRANDE_TAILLE_COTTAGECORE/annonces/T16_tapis_ananas_sisal",
+    "image_url": "https://img.kwcdn.com/product/2066d9194a/1377de0b-ea10-4915-8cf7-1f9b369d56c1_1000x1000.jpeg"
+  },
+  {
+    "produit": "abat-jour suspendu rotin tressé bohème structure fer",
+    "couleur": "naturel rotin",
+    "persona": "cottagecore_gt",
+    "type": "deco",
+    "output_dir": "personas/GRANDE_TAILLE_COTTAGECORE/annonces/T17_abatjour_rotin_boheme",
+    "image_url": "https://img.kwcdn.com/product/open/79b8be5fd2bb450f8dd625fc91feab78-goods.jpeg"
+  },
+  {
+    "produit": "panier suspendu corde chanvre macramé pour plantes",
+    "couleur": "brun naturel",
+    "persona": "cottagecore_gt",
+    "type": "deco",
+    "output_dir": "personas/GRANDE_TAILLE_COTTAGECORE/annonces/T18_panier_chanvre_plantes",
+    "image_url": null
+  },
+  {
+    "produit": "étagère à plantes 6 niveaux bois massif intérieur extérieur",
+    "couleur": "marron bois naturel",
+    "persona": "cottagecore_gt",
+    "type": "deco",
+    "output_dir": "personas/GRANDE_TAILLE_COTTAGECORE/annonces/T19_etagere_fleurs_bois",
+    "image_url": "https://img.kwcdn.com/product/open/523eaf6d36454176b0103f156e1509bd-goods.jpeg"
+  },
+  {
+    "produit": "décoration murale hirondelles dorées lot de 2 style vintage",
+    "couleur": "doré",
+    "persona": "larp_deco",
+    "type": "deco",
+    "output_dir": "personas/LARP_MEDIEVAL/annonces/T20_hirondelles_dorees_mural",
+    "image_url": "https://img.kwcdn.com/product/open/64e99e0052e74aba9124a0387b59d396-goods.jpeg"
+  },
+  {
+    "produit": "jean droit style américain vintage imprimé illusion 3D pendentif chaîne",
+    "couleur": "bleu clair denim",
+    "persona": "western",
+    "type": "vetement",
+    "output_dir": "personas/WESTERN_CHIC/annonces/T21_jean_americain_3D",
+    "image_url": "https://img.kwcdn.com/product/open/2024-07-27/1722094148799-15eda9ddd5c94c36976852871474096e-goods.jpeg"
+  },
+  {
+    "produit": "chaussures de skate épaisses plateforme unisexe",
+    "couleur": "blanc",
+    "persona": "western",
+    "type": "chaussures",
+    "output_dir": "personas/WESTERN_CHIC/annonces/T22_chaussures_skate_blanc",
+    "image_url": null
+  },
+  {
+    "produit": "veste à capuche color-block poches zippées",
+    "couleur": "gris",
+    "persona": "urban_streetwear",
+    "type": "vetement",
+    "output_dir": "personas/URBAN_STREETWEAR/annonces/T23_veste_capuche_colorblock",
+    "image_url": null
+  },
+  {
+    "produit": "ensemble veste bomber et pantalon large imprimé zèbre",
+    "couleur": "orange marron noir zèbre",
+    "persona": "urban_streetwear",
+    "type": "vetement",
+    "output_dir": "personas/URBAN_STREETWEAR/annonces/T24_ensemble_bomber_zebre",
+    "image_url": null
+  }
+]

@@ -1,2 +1,0 @@
-# PRODUCTION ANNONCES — Vinted
-
