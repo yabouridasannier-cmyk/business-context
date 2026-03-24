@@ -546,3 +546,42 @@ Attendre 6h
 ---
 
 *Process Production — M22 Mise à jour 23 mars 2026.*
+TEST_LINE_MARKER
+
+---
+
+## CALIBRATION QUALITÉ D'IMAGE GEMINI — RÈGLE DE L'ENTRE-DEUX
+
+### Le problème
+- Images **trop professionnelles** (studio, éclairage parfait, décor scandinave magazine) → se font masquer par Vinted (détection IA, trop lisse, pas authentique)
+- Images **trop messy** (lit défait, sol sale, éclairage jaune, angle tordu) → valeur perçue trop basse, le client ne veut pas payer 50-100€
+
+### La règle d'or : L'ENTRE-DEUX
+Le sweet spot = **"j'ai pris 30 secondes pour faire cette photo mais mon appart est correct"**
+
+### Directive de style pour les prompts Gemini
+Ajouter systématiquement ce bloc dans chaque prompt de génération :
+
+```
+STYLE INSTRUCTIONS: This photo should look like a real person's iPhone photo for Vinted, but still appealing. NOT a professional photoshoot (no perfect lighting, no studio setup), but also NOT super messy or ugly. Think: a tidy-ish real apartment, natural daylight from a window, the item is placed with some care but not perfectly styled. Small real-life details are fine (a remote control, a book, a phone charger cable) but the overall image should still make someone want to buy the item. The colors should be slightly warm and natural, not perfectly white-balanced. Slight angle imperfection is good.
+```
+
+### Checklist de validation avant publication
+- [ ] L'image fait "vraie" (pas de studio, pas de fond blanc parfait)
+- [ ] La valeur perçue reste haute (l'article a l'air désirable)
+- [ ] Des petits détails de vie réelle sont visibles (télécommande, tasse, câble)
+- [ ] L'éclairage est naturel mais pas parfait (légèrement chaud, pas blanc)
+- [ ] L'angle n'est pas parfaitement droit (léger décalage)
+- [ ] Le décor est rangé mais pas impeccable
+
+### 3 photos par annonce
+1. **Photo mise en scène** : l'article dans son contexte d'usage (canapé, chaise, sol) — entre-deux
+2. **Photo détail/texture** : close-up pour montrer la qualité — entre-deux
+3. **Photo brute** : l'article seul sur surface simple, vue d'ensemble — un peu plus basique
+
+### Red flags Vinted (ce qui déclenche le masquage)
+- Trop lisse, pas assez de contraste
+- Trop photoshopé / shooting pro
+- Fond trop parfait
+- Éclairage de studio
+- Mise en scène "monde idéal" / trop bien rangé
