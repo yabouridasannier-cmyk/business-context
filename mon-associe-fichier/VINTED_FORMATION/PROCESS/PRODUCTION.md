@@ -1,5 +1,5 @@
-# PROCESS PRODUCTION — Photo, Titre, Description jusqu'à Vinted
-*Méthode M22 — Mise à jour 23 mars 2026*
+h# PROCESS PRODUCTION — Photo, Titre, Description jusqu'à Vinted
+*Méthode M22 — Mise à jour 24 mars 2026*
 
 ---
 
@@ -545,7 +545,7 @@ Attendre 6h
 
 ---
 
-*Process roduction — M22 Mise à jour 23 mars 2026.*
+*Process roduction — M22 Mise à jour 24 mars 2026.*
 
 
 ---
