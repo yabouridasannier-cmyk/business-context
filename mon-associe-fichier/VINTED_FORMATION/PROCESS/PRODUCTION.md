@@ -8,7 +8,7 @@ h# PROCESS PRODUCTION — Photo, Titre, Description jusqu'à Vinted
 ```
 Étape 1: Photo fournisseur → Upscale.io
 Étape 2: Upscale → Screenshot
-Étape 3: Générer image IA (persona)
+Étape 3: Générer image IA (persona)h
 Étape 4: Cadrer + optimiser
 Étape 5: Rédaction (titre + description + hashtags)
 Étape 6: Publication + Boost immédiat
@@ -251,7 +251,7 @@ Mise en scène : Avec un objet de référence (lampe, meuble)
 ### Titre Vinted
 
 **Règles :**
-- Max 5 mots (court, impactant)
+- Titre LONG riche en mots-cles SEO (15-25 mots : type, couleur, matiere, style, taille, details) (court, impactant)
 - Mots-clés : ce que les gens tapent vraiment
 - Pas de majuscules excessives
 - Pas de prix/frais (Vinted refuse)
@@ -332,7 +332,7 @@ N'hésitez pas à me poser des questions 💬
 ### Hashtags
 
 **Règles :**
-- 5 hashtags maximum
+- 10-15 hashtags pour maximiser la visibilite
 - Pertinents à la niche
 - Tendance 2026 si possible
 - Pas de hashtags trop larges (#mode = inutile)
@@ -377,7 +377,7 @@ N'hésitez pas à me poser des questions 💬
 4. Catégorie : sélectionner (Vêtements femme / Accessoires / Déco)
 5. Taille : sélectionner (si applicable)
 6. État : Neuf / Très bon / Bon
-7. Titre : copier depuis préparation (max 5 mots)
+7. Titre : copier depuis préparation (Titre LONG riche en mots-cles SEO (15-25 mots : type, couleur, matiere, style, taille, details))
 8. Description : copier (3-4 lignes)
 9. Hashtags : copier (5 max)
 10. Prix : mentionné SANS frais Vinted (ils se soustraient auto)
